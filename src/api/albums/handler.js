@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable eol-last */
+/* eslint-disable linebreak-style */
 /* eslint-disable object-curly-newline */
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-trailing-spaces */

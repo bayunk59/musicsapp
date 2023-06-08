@@ -1,3 +1,4 @@
+/* eslint-disable eol-last */
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable indent */
 require('dotenv').config();
