@@ -32,16 +32,38 @@ class SongsService {
 
     if (!result.rows[0].id) {
         throw new InvariantError('Musik gagal ditambahkan');
-      }
-   
-      return result.rows[0].id;
+    }
+    return result.rows[0].id;
   }
 
-  async getSongs() {
-    const result = await this._pool.query('SELECT id, title, performer FROM songs');
-    return result.rows.map(mapDBToModel);
-  }
+  async getSongs(title, performer) {
+    let query = '';
+    if (title && performer) {
+      query = {
+        text: 'SELECT id, title, performer FROM songs where lower(title) like $1 and lower(performer) like $2',
+        values: [`%${title.toLowerCase()}%`,`%${performer.toLowerCase()}%`],
+      };
+    } else if (title) {
+      query = {
+        text: 'SELECT id, title, performer FROM songs where lower(title) like $1',
+        values: [`%${title.toLowerCase()}%`],
+      };
+    } else if (performer) {
+      query = {
+        text: 'SELECT id, title, performer FROM songs where lower(performer) like $1',
+        values: [`%${performer.toLowerCase()}%`],
+      };
+    } else {
+      query = 'SELECT id, title, performer FROM songs';
+    }
 
+    const result = await this._pool.query(query);
+    if (!result.rows.length) {
+      throw new NotFoundError('Musik tidak ditemukan');
+    }
+    return result.rows;
+  }
+  
   async getSongById(id) {
     const query = {
       text: 'SELECT * FROM songs WHERE id = $1',
@@ -52,7 +74,6 @@ class SongsService {
     if (!result.rows.length) {
       throw new NotFoundError('Musik tidak ditemukan');
     }
- 
     return result.rows.map(mapDBToModel)[0];
   }
 
