@@ -41,7 +41,7 @@ class SongsService {
     if (title && performer) {
       query = {
         text: 'SELECT id, title, performer FROM songs where lower(title) like $1 and lower(performer) like $2',
-        values: [`%${title.toLowerCase()}%`,`%${performer.toLowerCase()}%`],
+        values: [`%${title.toLowerCase()}%`, `%${performer.toLowerCase()}%`],
       };
     } else if (title) {
       query = {
