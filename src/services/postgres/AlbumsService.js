@@ -42,7 +42,7 @@ class AlbumsService {
     };
     const result = await this._pool.query(query);
  
-    //(!result.rows.length) disingkat jadi (!result.rowCount)
+    // (!result.rows.length) disingkat jadi (!result.rowCount)
     if (!result.rowCount) {
       throw new NotFoundError('Album tidak ditemukan');
     }
