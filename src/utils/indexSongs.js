@@ -6,7 +6,7 @@
 /* eslint-disable no-trailing-spaces */
 /* eslint-disable indent */
 /* eslint-disable linebreak-style */
-const mapDBToModel = ({ 
+const mapDBToModelSongs = ({ 
     id,
     title,
     year,
@@ -28,4 +28,4 @@ const mapDBToModel = ({
     updatedAt: updated_at,
   });
 
-module.exports = { mapDBToModel };
+module.exports = { mapDBToModelSongs };
